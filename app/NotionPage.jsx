@@ -2,30 +2,51 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getPageTitle } from 'notion-utils';
-import { NotionRenderer } from 'react-notion-x';
+import { NotionRenderer, defaultMapPageUrl } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code'
 import { Collection } from 'react-notion-x/build/third-party/collection'
 
 export const NotionPage = ({
-  recordMap,
+    recordMap,
+    previewImagesEnabled,
+    rootDomain,
+    rootPageId,
+    // mapPageUrl
+  }) => {
+    if (!recordMap) {
+      return null;
+    }
+    // const mapPageUrl = id => {
+    //   return 'https://www.notion.so/' + id.replace(/-/g, '')
+    // }
 
-}) => {
-  if (!recordMap) {
-    return null;
-  }
+    const mapPageUrl = slug => {
+      return `/blog/${slug}`;
+    };
 
-  return (
-    <>
-      <NotionRenderer
-        recordMap={recordMap}
-        fullPage={true}
-        components={{
-          nextLink: Link,
-          Code,
-          Collection,
-        }}
-      />
-    </>
-  );
-};
+    // {`/Blog/${post.slug}`}
+
+    return (
+      <>
+        <NotionRenderer
+          recordMap={recordMap}
+          rootPageId={rootPageId}
+          isLinkCollectionToUrlProperty ={true}
+          rootDomain={rootDomain}
+          previewImages ={previewImagesEnabled}
+          fullPage={true}
+          darkMode={true}
+          mapPageUrl={mapPageUrl}
+          components={{
+            nextLink: Link,
+            nextImage: Image,
+            Code,
+            Collection,
+            // Link href={`/blog/${post.slug}`}
+          }}
+        />
+      </>
+    );
+  };
