@@ -8,6 +8,8 @@ import { NotionRenderer, defaultMapPageUrl } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code'
 import { Collection } from 'react-notion-x/build/third-party/collection'
 
+
+
 export const NotionPage = ({
     recordMap,
     previewImagesEnabled,
@@ -18,15 +20,12 @@ export const NotionPage = ({
     if (!recordMap) {
       return null;
     }
-    // const mapPageUrl = id => {
-    //   return 'https://www.notion.so/' + id.replace(/-/g, '')
-    // }
 
     const mapPageUrl = slug => {
       return `/blog/${slug}`;
     };
 
-    // {`/Blog/${post.slug}`}
+    // {`/Blog/${post.slug}`
 
     return (
       <>

@@ -1,7 +1,10 @@
 import { NotionAPI } from "notion-client";
 import { NotionPage } from "../NotionPage";
-import { getPageBySlug, getPageContent, notionClient } from "../utils/notion";
+import { getPageBySlug, getPageContent, notionClient, recordMap } from "../utils/notion";
 import { BlogPages } from "../BlogPages";
+import { getPages } from "../utils/notion";
+import { root } from "postcss";
+import { getPageContentBlockIds } from "notion-utils";
 
 export default async function Page({ params }) {
     const notion = new NotionAPI({
@@ -10,7 +13,19 @@ export default async function Page({ params }) {
         })
  const recordMap = await notion.getPage('3259a1de358143d2bc429d6023b81179')
  
-  return (
-  <BlogPages recordMap={recordMap} />
-  
+const pages = await getPages()
+// const pages = await getPageContent('5f49cc7e73454ef1b8e991d386e0f67e')
+// console.log(pages)
+// console.log(pages.results)
+//  console.log(recordMap)
+
+// const blocks = await getPageContentBlockIds("df07a7b4-74e4-4382-9425-4d86d1cb872e")
+// console.log(blocks)
+
+return (
+    <>
+  <BlogPages recordMap={recordMap} slug={params} />
+    
+    </>
 )};
+// console.log(recordMap)

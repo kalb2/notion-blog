@@ -2,7 +2,7 @@ import { NotionPage } from "@/app/NotionPage";
 // import { recordMap } from "@/app/utils/notion";
 import { NotionAPI } from "notion-client";
 import { parsePageId } from "notion-utils";
-import { getPageContent, getPageBySlug, findPageBySlug } from "@/app/utils/notion";
+import { getPageContent, getPageBySlug, } from "@/app/utils/notion";
 
 const Page = async ({ params }) => {
   const notion = new NotionAPI({

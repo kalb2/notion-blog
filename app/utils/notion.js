@@ -20,7 +20,7 @@ export const notionClient = new Client({
     return notionClient.databases.query({
       filter: {
         property: "Status",
-        select: {
+        status: {
           equals: "Published",
         },
       },
