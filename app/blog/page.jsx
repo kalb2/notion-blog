@@ -11,7 +11,9 @@ export default async function Page({ params }) {
         activeUser: process.env.NOTION_ACTIVE_USER, 
         authToken: process.env.COOKIE
         })
- const recordMap = await notion.getPage('3259a1de358143d2bc429d6023b81179')
+//  const recordMap = await notion.getPage('3259a1de358143d2bc429d6023b81179')
+
+  const recordMap = await notion.getPage('aa9e9c19a2d5420fa6411ed446d06838')
  
 const pages = await getPages()
 // const pages = await getPageContent('5f49cc7e73454ef1b8e991d386e0f67e')
@@ -24,8 +26,8 @@ const pages = await getPages()
 
 return (
     <>
-  <BlogPages recordMap={recordMap} slug={params} />
+  <BlogPages recordMap={recordMap}  />
     
     </>
 )};
-// console.log(recordMap)
+// console.log(recordMap.block)
