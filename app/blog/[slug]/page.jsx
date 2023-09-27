@@ -1,8 +1,7 @@
 import { NotionPage } from "@/app/NotionPage";
-// import { recordMap } from "@/app/utils/notion";
 import { NotionAPI } from "notion-client";
-import { parsePageId, getPageTitle, getPageProperty } from "notion-utils";
-import { getPageContent, getPageBySlug, getBlockIdBySlug, } from "@/app/utils/notion";
+import { getBlockIdBySlug, } from "@/app/utils/notion";
+import { getPageTitle, getTextContent, normalizeUrl } from "notion-utils";
 
 const Page = async ({ params }) => {
   const notion = new NotionAPI({
@@ -16,7 +15,6 @@ const blockId = getBlockIdBySlug(params.slug)
 // console.log(blockId)
 
 const recordMap = await notion.getPage(blockId);
-
 
   // const post = await getPageBySlug(params.slug);
   // console.log("Post: ", post);
@@ -43,6 +41,7 @@ const recordMap = await notion.getPage(blockId);
   // console.log("PageContent: ", pageContent)
 // console.log(post.properties)
 // console.log(post.properties.Slug.rich_text[0].text.content)
+
   return <NotionPage recordMap={recordMap} />;
 };
 

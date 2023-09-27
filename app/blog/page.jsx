@@ -3,8 +3,6 @@ import { NotionPage } from "../NotionPage";
 import { getPageBySlug, getPageContent, notionClient, recordMap } from "../utils/notion";
 import { BlogPages } from "../BlogPages";
 import { getPages } from "../utils/notion";
-import { root } from "postcss";
-import { getPageContentBlockIds } from "notion-utils";
 
 export default async function Page({ params }) {
     const notion = new NotionAPI({

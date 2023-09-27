@@ -8,8 +8,6 @@ import { NotionRenderer, defaultMapPageUrl } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code'
 import { Collection } from 'react-notion-x/build/third-party/collection'
 
-
-
 export const NotionPage = ({
     recordMap,
     previewImagesEnabled,
@@ -25,8 +23,6 @@ export const NotionPage = ({
       return `/blog/${slug}`;
     };
 
-    // {`/Blog/${post.slug}`
-
     return (
       <>
         <NotionRenderer
@@ -38,12 +34,12 @@ export const NotionPage = ({
           fullPage={true}
           darkMode={false}
           mapPageUrl={mapPageUrl}
+          disableHeader
           components={{
             nextLink: Link,
             nextImage: Image,
             Code,
             Collection,
-            // Link href={`/blog/${post.slug}`}
           }}
         />
       </>
