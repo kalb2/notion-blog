@@ -49,27 +49,22 @@ export const BlogPages = ({
 //   };
   // Create a function to extract slugs and associate them with block IDs
   const extractSlugsAndBlockIds = (recordMap) => {
-    const slugsAndBlockIds = [];
-
-    // Iterate through the recordMap and extract slugs
-    Object.values(recordMap.block).forEach((block) => {
-      if (block.value.type === "page") {
+    return Object.values(recordMap.block)
+      .filter((block) => block.value.type === "page")
+      .map((block) => {
         const slugArray = block.value.properties?._hTE;
-
-        // Check if slugArray is an array and not empty
         if (Array.isArray(slugArray) && slugArray.length > 0) {
-          // Access the first element of the first array
           const slug = slugArray[0][0];
-          slugsAndBlockIds.push({ slug, blockId: block.value.id });
+          return { slug, blockId: block.value.id };
         }
-      }
-    });
-
-    return slugsAndBlockIds;
+        return null;
+      })
+      .filter((item) => item !== null);
   };
 
   // Extract slugs and block IDs
   const slugsAndBlockIds = extractSlugsAndBlockIds(recordMap);
+// console.log(slugsAndBlockIds)
 
   // Define the mapPageUrl function
   const mapPageUrl = (blockId) => {
@@ -97,7 +92,7 @@ export const BlogPages = ({
         rootDomain={rootDomain}
         previewImages={previewImagesEnabled}
         fullPage={true}
-        darkMode={true}
+        darkMode={false}
         mapPageUrl={mapPageUrl}
         disableHeader
         components={{

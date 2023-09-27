@@ -36,7 +36,7 @@ export const NotionPage = ({
           rootDomain={rootDomain}
           previewImages ={previewImagesEnabled}
           fullPage={true}
-          darkMode={true}
+          darkMode={false}
           mapPageUrl={mapPageUrl}
           components={{
             nextLink: Link,

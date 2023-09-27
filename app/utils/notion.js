@@ -47,5 +47,23 @@ export const notionClient = new Client({
       });
     return res.results[0] ;
   });
-  
-  
+
+  export const extractSlugsAndBlockIds = (recordMap) => {
+    return Object.values(recordMap.block)
+      .filter((block) => block.value.type === "page")
+      .map((block) => {
+        const slugArray = block.value.properties?._hTE;
+        if (Array.isArray(slugArray) && slugArray.length > 0) {
+          const slug = slugArray[0][0];
+          return { slug, blockId: block.value.id };
+        }
+        return null;
+      })
+      .filter((item) => item !== null);
+  };
+
+  export const getBlockIdBySlug = (targetSlug) => {
+    const slugsAndBlockIds = extractSlugsAndBlockIds(recordMap);
+    const matchingItem = slugsAndBlockIds.find((item) => item.slug === targetSlug);
+    return matchingItem ? matchingItem.blockId : null;
+  };
