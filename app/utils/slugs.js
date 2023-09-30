@@ -1,4 +1,3 @@
-import "server-only";
 import { NotionAPI } from 'notion-client'
 import { Client } from "@notionhq/client";
 import { cache } from "react";
@@ -9,7 +8,7 @@ const notion = new NotionAPI({
     authToken: process.env.COOKIE
     })
 
-export const recordMap = await notion.getPage('3259a1de358143d2bc429d6023b81179')
+export const recordMap = await notion.getPage('ee8520017e804b828581a5fa615aec1b')
 
 
 export const notionClient = new Client({
@@ -49,15 +48,29 @@ export const notionClient = new Client({
     return res.results[0] ;
   });
 
-  export const extractSlugsAndBlockIds = (recordMap) => {
-  return Object.values(recordMap.block)
-    .filter((block) => block.value.type === 'page')
-    .map((block) => {
-      const slug = getPageProperty('slug', block.value, recordMap);
-      return slug ? { slug, blockId: block.value.id } : null;
-    })
-    .filter(Boolean); // Removes null values from the array
-};
+//   export const extractSlugsAndBlockIds = (recordMap) => {
+//     return Object.values(recordMap.block)
+//       .filter((block) => block.value.type === "page")
+//       .map((block) => {
+//         const slugArray = block.value.properties?._hTE;
+//         if (Array.isArray(slugArray) && slugArray.length > 0) {
+//           const slug = slugArray[0][0];
+//           return { slug, blockId: block.value.id };
+//         }
+//         return null;
+//       })
+//       .filter((item) => item !== null);
+//   };
+
+export const extractSlugsAndBlockIds = (recordMap) => {
+    return Object.values(recordMap.block)
+      .filter((block) => block.value.type === 'page')
+      .map((block) => {
+        const slug = getPageProperty('slug', block.value, recordMap);
+        return slug ? { slug, blockId: block.value.id } : null;
+      })
+      .filter(Boolean); // Removes null values from the array
+  };
 
   export const getBlockIdBySlug = (targetSlug) => {
     const slugsAndBlockIds = extractSlugsAndBlockIds(recordMap);

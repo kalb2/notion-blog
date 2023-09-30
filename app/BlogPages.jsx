@@ -46,6 +46,7 @@ export const BlogPages = ({
       })
       .filter((item) => item !== null);
   };
+  // console.log("recordMap: ", recordMap)
 
   // Extract slugs and block IDs
   const slugsAndBlockIds = extractSlugsAndBlockIds(recordMap);
@@ -63,7 +64,7 @@ export const BlogPages = ({
       return linkUrl;
     }
 
-    return defaultMapPageUrl(blockId); // Fallback to default behavior
+    return defaultMapPageUrl(blockId); 
   };
 
 
@@ -87,7 +88,6 @@ export const BlogPages = ({
           
         }}
       />
-      {/* {console.log("PageLink Component:", recordMap)} */}
     </>
   );
 };
